@@ -86,44 +86,4 @@ class EmailService {
 
     await send(message, _smtpServer);
   }
-
-  /// Envia o comprovante de avaliação em PDF para o professor.
-  static Future<void> enviarComprovanteAluno({
-    required String destinatario,
-    required String alunoNome,
-    required String tituloFormulario,
-    required double? nota,
-    required Uint8List pdfBytes,
-  }) async {
-    final notaHtml = nota != null
-        ? '<p>Nota obtida: <strong style="color: #2E7D32;">'
-              '${nota.toStringAsFixed(1)} / 10</strong></p>'
-        : '';
-
-    final message = Message()
-      ..from = Address(_smtpEmail, _nomeRemetente)
-      ..recipients.add(destinatario)
-      ..subject = 'Comprovante de Avaliação — $tituloFormulario'
-      ..html =
-          '''
-        <div style="font-family: Arial, sans-serif; max-width: 480px; margin: auto;">
-          <h2 style="color: #2E7D32;">SATCCO App</h2>
-          <p>O aluno <strong>$alunoNome</strong> partilhou o comprovante
-             da avaliação <strong>$tituloFormulario</strong>.</p>
-          $notaHtml
-          <p style="color: #666; font-size: 12px;">
-            Consulte o PDF em anexo para mais detalhes.
-          </p>
-        </div>
-      '''
-      ..attachments = [
-        StreamAttachment(
-          Stream.fromIterable([pdfBytes]),
-          'application/pdf',
-          fileName: 'Comprovante_${tituloFormulario.replaceAll(' ', '_')}.pdf',
-        ),
-      ];
-
-    await send(message, _smtpServer);
-  }
 }
