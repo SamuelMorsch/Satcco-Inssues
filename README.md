@@ -62,21 +62,6 @@ Após criar o projeto e adicionar os dois aplicativos (Android e iOS), a seção
 
 > **Atenção:** nunca commite `google-services.json` ou `GoogleService-Info.plist` em repositórios públicos — eles contêm chaves de API.
 
-### 4. Regras do Firestore (exemplo mínimo)
-
-```
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if request.auth != null;
-    }
-  }
-}
-```
-
-Ajuste conforme a política de segurança do projeto antes de ir para produção.
-
 ---
 
 ## Configuração do Gmail (SMTP) e arquivo .env
