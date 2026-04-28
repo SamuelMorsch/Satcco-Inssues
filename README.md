@@ -34,7 +34,8 @@ Aplicativo Flutter para gestão de avaliações acadêmicas. Professores criam f
 
 Após criar o projeto e adicionar os dois aplicativos (Android e iOS), a seção **Seus aplicativos** no Firebase Console deve estar assim:
 
-![Aplicativos configurados no Firebase Console](docs/firebase_apps.png)
+<img width="606" height="444" alt="image" src="https://github.com/user-attachments/assets/d37df53d-4f17-418c-8d6e-3f2085394873" />
+[Aplicativos configurados no Firebase Console]
 
 ### 2. Gerar o arquivo de configuração para Android
 
