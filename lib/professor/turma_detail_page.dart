@@ -989,19 +989,21 @@ Future<List<Map<String, dynamic>>> _carregarNotasRelatorio({
   for (final alunoDoc in alunosSnap.docs) {
     final alunoData = alunoDoc.data() as Map<String, dynamic>;
     final email = (alunoData['email'] as String?) ?? alunoDoc.id;
-    final nome = (alunoData['nome'] as String?) ?? email;
+    final nomeBase = alunoData['nome'] as String?;
     final alunoId = alunoData['aluno_id'] as String?;
 
     if (alunoId == null) {
-      result.add({'nome': nome, 'email': email, 'nota': null, 'data': null});
+      result.add({'nome': nomeBase ?? email, 'email': email, 'nota': null, 'data': null});
       continue;
     }
 
     final resposta = respostasByAluno[alunoId];
     if (resposta == null) {
-      result.add({'nome': nome, 'email': email, 'nota': null, 'data': null});
+      result.add({'nome': nomeBase ?? email, 'email': email, 'nota': null, 'data': null});
       continue;
     }
+
+    final nome = (resposta['aluno_nome'] as String?) ?? nomeBase ?? email;
 
     final respostas =
         List<Map<String, dynamic>>.from(resposta['respostas'] ?? []);
